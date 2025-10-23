@@ -8,6 +8,10 @@ class Ships {
     this.timesHit++;
     return this.timesHit;
   }
+
+  isSunk() {
+    return this.timesHit >= this.length;
+  }
 }
 
 export { Ships };
