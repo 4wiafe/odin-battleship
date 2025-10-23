@@ -13,4 +13,8 @@ describe('ship properties', () => {
   test('check damage taken', () => {
     expect(ship1.hit()).toBe(1);
   });
+
+  test('has ship sunk', () => {
+    expect(ship1.isSunk()).toBe(false);
+  });
 });
