@@ -9,4 +9,8 @@ describe('ship properties', () => {
   test('ship damage taken', () => {
     expect(ship1.timesHit).toEqual(0);
   });
+
+  test('check damage taken', () => {
+    expect(ship1.hit()).toBe(1);
+  });
 });
