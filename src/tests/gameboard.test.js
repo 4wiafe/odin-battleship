@@ -7,7 +7,13 @@ describe('gameboard behavior', () => {
     expect(gameboard).toBeTruthy();
   });
 
-  test('board should be an array', () => {
+  test('board should be an array with 10 rows', () => {
     expect(gameboard.board.length).toBe(10);
+  });
+
+  test('each row should have 10 cells', () => {
+    expect(gameboard.board.every(row => {
+      return Array.isArray(row);
+    })).toBeTruthy();
   });
 });
