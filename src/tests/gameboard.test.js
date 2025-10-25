@@ -20,4 +20,8 @@ describe('gameboard behavior', () => {
   test('each row should have 10 cells', () => {
     expect(gameboard.board.every(row => row.length === 10)).toBeTruthy();
   });
+
+  test('place ship on board successfully', () => {
+    expect(gameboard.placeShip(ship, 0, 0, 'horizontal')).toBe(true);
+  });
 });
