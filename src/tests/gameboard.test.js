@@ -16,4 +16,8 @@ describe('gameboard behavior', () => {
       return Array.isArray(row);
     })).toBeTruthy();
   });
+
+  test('each row should have 10 cells', () => {
+    expect(gameboard.board.every(row => row.length === 10)).toBeTruthy();
+  });
 });
