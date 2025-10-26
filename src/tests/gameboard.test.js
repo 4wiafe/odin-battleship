@@ -1,6 +1,8 @@
 import { Gameboard } from "../gameboard/gameboard";
+import { Ships } from "../ships/ships";
 
 const gameboard = new Gameboard();
+const ship = new Ships(4);
 
 describe('gameboard behavior', () => {
   test(`should create a new gameboard instance successfully`, () => {
