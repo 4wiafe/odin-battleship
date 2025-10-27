@@ -26,4 +26,8 @@ describe('gameboard behavior', () => {
   test('place ship on board successfully', () => {
     expect(gameboard.placeShip(ship, 0, 0, 'horizontal')).toBe(true);
   });
+
+  test('attack cells', () => {
+    expect(gameboard.receiveAttack(0, 0)).toBe(true);
+  });
 });
