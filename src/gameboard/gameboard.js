@@ -17,6 +17,10 @@ class Gameboard {
         if (this.board[y][x + i] !== null) return false;
 
         this.board[y][x + i] = ship;
+      } else if (direction === 'vertical') {
+        if (this.board[y + i][x] !== null) return false;
+
+        this.board[y + i][x] = ship;
       }
     }
 
@@ -25,7 +29,7 @@ class Gameboard {
 }
 
 const newBoard = new Gameboard();
-console.log(newBoard.placeShip(ship1, 0, 0, 'horizontal'));
-// console.log(newBoard.placeShip(ship2, 0, 0, 'horizontal'));
+console.log(newBoard.placeShip(ship1, 0, 0, 'vertical'));
+console.log(newBoard.placeShip(ship1, 0, 0, "vertical"));
 
 export { Gameboard };
