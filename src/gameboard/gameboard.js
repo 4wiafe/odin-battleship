@@ -1,25 +1,26 @@
-import { Ships } from "../ships/ships.js";
-
-const ship1 = new Ships(3);
-const ship2 = new Ships(4);
-
 class Gameboard {
   board = Array.from({ length: 10 }, () => Array(10).fill(null));
 
   placeShip(ship, x, y, direction) {
-    if (
-      (direction === 'horizontal' && x + ship.length > this.board.length) ||
-      (direction === 'vertical' && y + ship.length > this.board.length)
-    ) return false;
+    const { length } = ship;
+    const size = this.board.length;
 
-    for (let i = 0; i < ship.length; i++) {
+    const isOutOfBounds =
+      (direction === 'horizontal' && x + length > size) ||
+      (direction === 'vertical' && y + length > size);
+    
+    if (isOutOfBounds) return false;
+
+    for (let i = 0; i < length; i++) {
+      const cell = direction === 'horizontal' ? this.board[y][x + i] : this.board[y + i][x];
+
+      if (cell !== null) return false;
+    }
+
+    for (let i = 0; i < length; i++) {
       if (direction === 'horizontal') {
-        if (this.board[y][x + i] !== null) return false;
-
         this.board[y][x + i] = ship;
-      } else if (direction === 'vertical') {
-        if (this.board[y + i][x] !== null) return false;
-
+      } else {
         this.board[y + i][x] = ship;
       }
     }
@@ -27,9 +28,5 @@ class Gameboard {
     return true;
   }
 }
-
-const newBoard = new Gameboard();
-console.log(newBoard.placeShip(ship1, 0, 0, 'vertical'));
-console.log(newBoard.placeShip(ship1, 0, 0, "vertical"));
 
 export { Gameboard };
