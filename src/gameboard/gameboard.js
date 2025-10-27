@@ -8,19 +8,22 @@ class Gameboard {
     const size = this.board.length;
 
     const isOutOfBounds =
-      (direction === 'horizontal' && x + length > size) ||
-      (direction === 'vertical' && y + length > size);
-    
+      (direction === "horizontal" && x + length > size) ||
+      (direction === "vertical" && y + length > size);
+
     if (isOutOfBounds) return false;
 
     for (let i = 0; i < length; i++) {
-      const cell = direction === 'horizontal' ? this.board[y][x + i] : this.board[y + i][x];
+      const cell =
+        direction === "horizontal"
+          ? this.board[y][x + i]
+          : this.board[y + i][x];
 
       if (cell !== null) return false;
     }
 
     for (let i = 0; i < length; i++) {
-      if (direction === 'horizontal') {
+      if (direction === "horizontal") {
         this.board[y][x + i] = ship;
       } else {
         this.board[y + i][x] = ship;
@@ -29,6 +32,24 @@ class Gameboard {
 
     return true;
   }
+
+  receiveAttack(x, y) {
+    const hit = "hit";
+    const miss = "miss";
+
+    if (this.board[y][x] !== null) {
+      console.log(hit);
+      return true;
+    } else {
+      console.log(miss);
+      return false;
+    }
+  }
 }
+
+const ship1 = new Ships(3);
+const gameboard = new Gameboard();
+gameboard.placeShip(ship1, 0, 1, "horizontal");
+console.log(gameboard.receiveAttack(0, 1));
 
 export { Gameboard };
