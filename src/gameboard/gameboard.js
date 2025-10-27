@@ -14,7 +14,9 @@ class Gameboard {
 
     for (let i = 0; i < ship.length; i++) {
       if (direction === 'horizontal') {
-        
+        if (this.board[y][x + i] !== null) return false;
+
+        this.board[y][x + i] = ship;
       }
     }
 
@@ -24,6 +26,6 @@ class Gameboard {
 
 const newBoard = new Gameboard();
 console.log(newBoard.placeShip(ship1, 0, 0, 'horizontal'));
-console.log(newBoard.placeShip(ship2, 0, 0, 'horizontal'));
+// console.log(newBoard.placeShip(ship2, 0, 0, 'horizontal'));
 
 export { Gameboard };
