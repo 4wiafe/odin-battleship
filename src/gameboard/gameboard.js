@@ -36,12 +36,11 @@ class Gameboard {
   receiveAttack(x, y) {
     const hit = "hit";
     const miss = "miss";
-    const alreadyHit = 'already hit';
 
     if (
       this.board[y][x] === hit ||
       this.board[y][x] === miss
-    ) return alreadyHit;
+    ) return false;
 
     if (this.board[y][x] !== null) {
       this.board[y][x] = hit;
