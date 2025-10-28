@@ -1,9 +1,17 @@
 import { Ships } from '../ships/ships.js';
 
 class Gameboard {
-  board = Array.from({ length: 10 }, () => Array(10).fill(null));
+  constructor() {
+    this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
+    this.ships = [];
+    this.MAX_SHIPS = 5;
+  }
 
   placeShip(ship, x, y, direction) {
+    if (this.ships.length >= this.MAX_SHIPS) {
+      return false;
+    }
+
     const { length } = ship;
     const size = this.board.length;
 
@@ -30,6 +38,7 @@ class Gameboard {
       }
     }
 
+    this.ships.push(ship);
     return true;
   }
 
