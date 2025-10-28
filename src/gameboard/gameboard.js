@@ -1,5 +1,3 @@
-import { Ships } from '../ships/ships.js';
-
 class Gameboard {
   constructor() {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
@@ -16,14 +14,14 @@ class Gameboard {
     const size = this.board.length;
 
     const isOutOfBounds =
-      (direction === 'horizontal' && x + length > size) ||
-      (direction === 'vertical' && y + length > size);
+      (direction === "horizontal" && x + length > size) ||
+      (direction === "vertical" && y + length > size);
 
     if (isOutOfBounds) return false;
 
     for (let i = 0; i < length; i++) {
       const cell =
-        direction === 'horizontal'
+        direction === "horizontal"
           ? this.board[y][x + i]
           : this.board[y + i][x];
 
@@ -31,7 +29,7 @@ class Gameboard {
     }
 
     for (let i = 0; i < length; i++) {
-      if (direction === 'horizontal') {
+      if (direction === "horizontal") {
         this.board[y][x + i] = ship;
       } else {
         this.board[y + i][x] = ship;
@@ -43,39 +41,32 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
-    if (
-      x < 0 ||
-      y < 0 ||
-      y >= this.board.length ||
-      x >= this.board.length
-    ) {
+    if (x < 0 || y < 0 || y >= this.board.length || x >= this.board.length) {
       throw new Error(`Invalid attack coordinate ${y}, ${x}`);
     }
 
     const cell = this.board[y][x];
 
-    if (cell === 'hit' || cell === 'miss') {
-      return 'already hit';
+    if (cell === "hit" || cell === "miss") {
+      return "already hit";
     }
 
-    if (cell && typeof cell.hit === 'function') {
+    if (cell && typeof cell.hit === "function") {
       cell.hit();
-      this.board[y][x] = 'hit';
+      this.board[y][x] = "hit";
 
-      return 'hit';
+      return "hit";
     }
 
-    this.board[y][x] = 'miss';
-    return 'miss';
+    this.board[y][x] = "miss";
+    return "miss";
+  }
+
+  allShipsSunk() {
+    console.log(this.ships.map((s) => s.isSunk()));
+
+    return this.ships.every(ship => ship.isSunk());
   }
 }
-
-const ship1 = new Ships(3);
-const gameboard = new Gameboard();
-gameboard.placeShip(ship1, 0, 0, "horizontal");
-console.log(gameboard.receiveAttack(0, 0));
-console.log(gameboard.receiveAttack(0, 0));
-console.log(gameboard.receiveAttack(1, 1));
-console.log(gameboard.receiveAttack(1, 1));
 
 export { Gameboard };
