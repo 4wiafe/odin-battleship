@@ -1,4 +1,4 @@
-import { Ships } from "../ships/ships.js";
+import { Ships } from '../ships/ships.js';
 
 class Gameboard {
   board = Array.from({ length: 10 }, () => Array(10).fill(null));
@@ -8,14 +8,14 @@ class Gameboard {
     const size = this.board.length;
 
     const isOutOfBounds =
-      (direction === "horizontal" && x + length > size) ||
-      (direction === "vertical" && y + length > size);
+      (direction === 'horizontal' && x + length > size) ||
+      (direction === 'vertical' && y + length > size);
 
     if (isOutOfBounds) return false;
 
     for (let i = 0; i < length; i++) {
       const cell =
-        direction === "horizontal"
+        direction === 'horizontal'
           ? this.board[y][x + i]
           : this.board[y + i][x];
 
@@ -23,7 +23,7 @@ class Gameboard {
     }
 
     for (let i = 0; i < length; i++) {
-      if (direction === "horizontal") {
+      if (direction === 'horizontal') {
         this.board[y][x + i] = ship;
       } else {
         this.board[y + i][x] = ship;
@@ -34,22 +34,30 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
-    const hit = "hit";
-    const miss = "miss";
-    const alreadyHit = 'already hit';
-
     if (
-      this.board[y][x] === hit ||
-      this.board[y][x] === miss
-    ) return alreadyHit;
-
-    if (this.board[y][x] !== null) {
-      this.board[y][x] = hit;
-      return hit;
-    } else {
-      this.board[y][x] = miss;
-      return miss;
+      x < 0 ||
+      y < 0 ||
+      y >= this.board.length ||
+      x >= this.board.length
+    ) {
+      throw new Error(`Invalid attack coordinate ${y}, ${x}`);
     }
+
+    const cell = this.board[y][x];
+
+    if (cell === 'hit' || cell === 'miss') {
+      return 'already hit';
+    }
+
+    if (cell && typeof cell.hit === 'function') {
+      cell.hit();
+      this.board[y][x] = 'hit';
+
+      return 'hit';
+    }
+
+    this.board[y][x] = 'miss';
+    return 'miss';
   }
 }
 
