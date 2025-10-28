@@ -63,8 +63,6 @@ class Gameboard {
   }
 
   allShipsSunk() {
-    console.log(this.ships.map((s) => s.isSunk()));
-
     return this.ships.every(ship => ship.isSunk());
   }
 }
