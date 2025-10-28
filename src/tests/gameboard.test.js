@@ -28,8 +28,8 @@ describe('gameboard behavior', () => {
   });
 
   test('attack cells', () => {
-    expect(gameboard.receiveAttack(0, 0)).toBe(true);
-    expect(gameboard.receiveAttack(0, 0)).toBe(false);
-    expect(gameboard.receiveAttack(1, 1)).toBe(false);
+    expect(gameboard.receiveAttack(0, 0)).toBe('hit');
+    expect(gameboard.receiveAttack(0, 0)).toBe('already hit');
+    expect(gameboard.receiveAttack(1, 1)).toBe('miss');
   });
 });
