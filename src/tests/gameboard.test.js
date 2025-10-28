@@ -32,4 +32,15 @@ describe('gameboard behavior', () => {
     expect(gameboard.receiveAttack(0, 0)).toBe('already hit');
     expect(gameboard.receiveAttack(1, 1)).toBe('miss');
   });
+
+  test('should call ship.hit() when a ship is hit', () => {
+    const mockShip = { hit: jest.fn(), length: 3 };
+    const mockGameboard = new Gameboard();
+
+    mockGameboard.placeShip(mockShip, 0, 0, 'horizontal');
+
+    mockGameboard.receiveAttack(0, 0);
+
+    expect(mockShip.hit).toHaveBeenCalledTimes(1);
+  });
 });
