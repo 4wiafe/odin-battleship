@@ -43,4 +43,15 @@ describe('gameboard behavior', () => {
 
     expect(mockShip.hit).toHaveBeenCalledTimes(1);
   });
+
+  test('should check if all ships have sunk', () => {
+    gameboard.placeShip(ship, 0, 0, 'horizontal');
+    expect(gameboard.allShipsSunk()).toBe(false);
+
+    for (let i = 0; i < ship.length; i++) {
+      gameboard.receiveAttack(i, 0);
+    }
+
+    expect(gameboard.allShipsSunk()).toBe(true);
+  });
 });
