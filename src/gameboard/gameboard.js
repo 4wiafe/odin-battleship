@@ -36,12 +36,18 @@ class Gameboard {
   receiveAttack(x, y) {
     const hit = "hit";
     const miss = "miss";
+    const alreadyHit = 'already hit';
+
+    if (
+      this.board[y][x] === hit ||
+      this.board[y][x] === miss
+    ) return alreadyHit;
 
     if (this.board[y][x] !== null) {
-      console.log(hit);
+      this.board[y][x] = hit;
       return true;
     } else {
-      console.log(miss);
+      this.board[y][x] = miss;
       return false;
     }
   }
@@ -49,7 +55,10 @@ class Gameboard {
 
 const ship1 = new Ships(3);
 const gameboard = new Gameboard();
-gameboard.placeShip(ship1, 0, 1, "horizontal");
-console.log(gameboard.receiveAttack(0, 1));
+gameboard.placeShip(ship1, 0, 0, "horizontal");
+console.log(gameboard.receiveAttack(0, 0));
+console.log(gameboard.receiveAttack(0, 0));
+console.log(gameboard.receiveAttack(1, 1));
+console.log(gameboard.receiveAttack(1, 1));
 
 export { Gameboard };
