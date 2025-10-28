@@ -27,10 +27,21 @@ describe('gameboard behavior', () => {
     expect(gameboard.placeShip(ship, 0, 0, 'horizontal')).toBe(true);
   });
 
+  test('should not allow placing more than 5 ships', () => {
+    for (let i = 0; i < 5; i++) {
+      const ship = new Ships(3);
+      gameboard.placeShip(ship, 0, i, 'horizontal');
+    }
+
+    const extraShip = new Ships(2);
+
+    expect(gameboard.placeShip(extraShip, 0, 5, 'horizontal')).toBe(false);
+  });
+
   test('attack cells', () => {
     expect(gameboard.receiveAttack(0, 0)).toBe('hit');
     expect(gameboard.receiveAttack(0, 0)).toBe('already hit');
-    expect(gameboard.receiveAttack(1, 1)).toBe('miss');
+    expect(gameboard.receiveAttack(3, 3)).toBe('miss');
   });
 
   test('should call ship.hit() when a ship is hit', () => {
