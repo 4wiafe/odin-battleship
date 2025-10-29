@@ -16,4 +16,8 @@ describe("player behavior", () => {
   test("should create a player instance successfully", () => {
     expect(player).toBeTruthy();
   });
+
+  test("player should be able to place ships", () => {
+    expect(player.setShips()).toBe(true);
+  });
 });

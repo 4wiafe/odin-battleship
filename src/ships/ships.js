@@ -19,6 +19,4 @@ class Ships {
   }
 }
 
-const ship = new Ships(9);
-console.log(ship);
 export { Ships };
