@@ -1,6 +1,11 @@
 class Ships {
   constructor(length) {
-    this.length = length;
+    if (length < 1 || length > 8) {
+      throw new Error("Length of ship must be from 1 to 8");
+    } else {
+      this.length = length;
+    }
+    
     this.timesHit = 0;
   }
 
@@ -14,4 +19,6 @@ class Ships {
   }
 }
 
+const ship = new Ships(9);
+console.log(ship);
 export { Ships };
