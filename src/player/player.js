@@ -13,6 +13,7 @@ class Player {
     
     for (let i = 0; i < shipsLength.length; i++) {
       let ship = new Ships(shipsLength[i]);
+
       let placed = false;
       let maxAttempts = 100;
 
