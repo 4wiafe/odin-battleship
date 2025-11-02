@@ -33,33 +33,23 @@ class Player {
   }
 
   makeMove(opponentBoard, x, y) {
-    let gameOver = false;
-    let attackBoard = opponentBoard.receiveAttack(x, y);
+    const attackBoard = opponentBoard.receiveAttack(x, y);
 
-    while (!gameOver) {
-      if (attackBoard === "hit") {
-        opponentBoard.ships.forEach(ship => {
-          if (ship.isSunk()) {
-            console.log(`Ship ${ship.length} has sunk!`);
-          }
-        });
-
-        const boardStatus = opponentBoard.allShipsSunk();
-
-        if (boardStatus) {
-          console.log("All ships have sunk! Game over!");
-          
-          gameOver = true;
-
-          return "Game over!";
-        } else {
-          return "hit";
+    if (attackBoard === "hit") {
+      opponentBoard.ships.forEach(ship => {
+        if (ship.isSunk()) {
+          console.log(`Ship ${ship.length} has sunk!`);
         }
-      } else {
-        gameOver = true;
-        return attackBoard;
+      });
+
+      const boardStatus = opponentBoard.allShipsSunk();
+
+      if (boardStatus) {
+        console.log("All ships have sunk!");
       }
     }
+
+    return attackBoard;
   }
 }
 
