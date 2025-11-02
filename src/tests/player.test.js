@@ -22,13 +22,19 @@ describe("player behavior", () => {
   });
 
   test("player should be able to attack opponent's board", () => {
-    const mockOpponent = { receiveAttack: jest.fn() };
     const x = 0;
     const y = 0;
+    
+    const mockOpponent = {
+      receiveAttack: jest.fn(),
+      ships: [{isSunk: jest.fn()}],
+      allShipsSunk: jest.fn()
+    };
 
-    mockOpponent.receiveAttack.mockReturnValueOnce("hit");
-    mockOpponent.receiveAttack.mockReturnValueOnce("miss");
-    mockOpponent.receiveAttack.mockReturnValueOnce("already hit");
+    mockOpponent.receiveAttack
+      .mockReturnValueOnce("hit")
+      .mockReturnValueOnce("miss")
+      .mockReturnValueOnce("already hit");
 
     const hitResult = player.makeMove(mockOpponent, x, y);
     expect(mockOpponent.receiveAttack).toHaveBeenCalledWith(x, y);
@@ -42,7 +48,8 @@ describe("player behavior", () => {
     expect(mockOpponent.receiveAttack).toHaveBeenCalledWith(x, y);
     expect(alreadyHit).toBe("already hit");
 
+    expect(mockOpponent.ships[0].isSunk).toHaveBeenCalledTimes(1);
+    expect(mockOpponent.allShipsSunk).toHaveBeenCalledTimes(1);
     expect(mockOpponent.receiveAttack).toHaveBeenCalledTimes(3);
-    expect(mockOpponent.receiveAttack).toHaveBeenCalledWith(x, y);
   });
 });
