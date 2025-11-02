@@ -33,23 +33,39 @@ class Player {
   }
 
   makeMove(opponentBoard, x, y) {
-    const attackBoard = opponentBoard.receiveAttack(x, y);
+    const attackResult = opponentBoard.receiveAttack(x, y);
 
-    if (attackBoard === "hit") {
-      opponentBoard.ships.forEach(ship => {
+    if (attackResult === "hit") {
+      opponentBoard.ships.forEach((ship) => {
         if (ship.isSunk()) {
           console.log(`Ship ${ship.length} has sunk!`);
         }
       });
 
-      const boardStatus = opponentBoard.allShipsSunk();
+      const allSunk = opponentBoard.allShipsSunk();
 
-      if (boardStatus) {
+      if (allSunk) {
         console.log("All ships have sunk!");
+
+        return "Game over!";
       }
+
+      return "hit";
     }
 
-    return attackBoard;
+    if (attackResult === "miss") {
+      console.log("You missed!");
+
+      return "miss";
+    }
+
+    if (attackResult === "already hit") {
+      console.log("Coordinates already attacked. Try different coordinates.");
+
+      return "already hit";
+    }
+
+    return attackResult;
   }
 }
 
