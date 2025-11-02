@@ -31,6 +31,36 @@ class Player {
 
     return true;
   }
+
+  makeMove(opponentBoard, x, y) {
+    let gameOver = false;
+    let attackBoard = opponentBoard.receiveAttack(x, y);
+
+    while (!gameOver) {
+      if (attackBoard === "hit") {
+        opponentBoard.ships.forEach(ship => {
+          if (ship.isSunk()) {
+            console.log(`Ship ${ship.length} has sunk!`);
+          }
+        });
+
+        const boardStatus = opponentBoard.allShipsSunk();
+
+        if (boardStatus) {
+          console.log("All ships have sunk! Game over!");
+          
+          gameOver = true;
+
+          return "Game over!";
+        } else {
+          return "hit";
+        }
+      } else {
+        gameOver = true;
+        return attackBoard;
+      }
+    }
+  }
 }
 
 export { Player };
