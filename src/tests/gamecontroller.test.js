@@ -24,5 +24,6 @@ describe("game behavior", () => {
     expect(gameController.computer).toBeTruthy();
     expect(gameController.player).toBeInstanceOf(Player);
     expect(gameController.computer).toBeInstanceOf(Computer);
+    expect(gameController.currentTurn).toBe(gameController.player);
   });
 });
