@@ -3,10 +3,12 @@ import { Player } from "../player/player.js";
 
 class GameController {
   constructor() {
-    this.currentTurn = false;
+    this.currentTurn = null;
     this.isGameOver = false;
     this.winner = null;
   }
+
+  initialize() {}
 }
 
 export { GameController };

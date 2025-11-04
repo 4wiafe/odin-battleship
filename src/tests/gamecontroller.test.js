@@ -16,4 +16,13 @@ describe("game behavior", () => {
   test("should have a gameController instance", () => {
     expect(gameController).toBeTruthy();
   });
+
+  test("should initialize with player and computer instances", () => {
+    gameController.initialize();
+
+    expect(gameController.player).toBeTruthy();
+    expect(gameController.computer).toBeTruthy();
+    expect(gameController.player).toBeInstanceOf(Player);
+    expect(gameController.computer).toBeInstanceOf(Computer);
+  });
 });
