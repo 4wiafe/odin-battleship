@@ -8,7 +8,10 @@ class GameController {
     this.winner = null;
   }
 
-  initialize() {}
+  initialize() {
+    this.player = new Player();
+    this.computer = new Computer();
+  }
 }
 
 export { GameController };
