@@ -11,6 +11,7 @@ class GameController {
   initialize() {
     this.player = new Player();
     this.computer = new Computer();
+    this.currentTurn = this.player;
   }
 }
 
