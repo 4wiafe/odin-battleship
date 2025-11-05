@@ -34,4 +34,19 @@ describe("game behavior", () => {
     expect(gameController.switchTurn()).toBeTruthy();
     expect(gameController.currentTurn).toBe(gameController.computer);
   });
+
+  test("should execute a turn and switch player", () => {
+    gameController.initialize();
+   
+    const x = 0;
+    const y = 0;
+
+    expect(gameController.currentTurn).toBe(gameController.player);
+
+    const result = gameController.executeTurn(x, y);
+
+    expect(["hit", "miss", "already hit", "Game over!"]).toContain(result);
+    expect(gameController.currentTurn).toBe(gameController.computer);
+    expect(gameController.isGameOver).toBe(false);
+  });
 });
