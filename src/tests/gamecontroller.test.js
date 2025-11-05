@@ -26,4 +26,11 @@ describe("game behavior", () => {
     expect(gameController.computer).toBeInstanceOf(Computer);
     expect(gameController.currentTurn).toBe(gameController.player);
   });
+
+  test("should have a switchTurn() method", () => {
+    gameController.currentTurn = gameController.player;
+    
+    expect(gameController.switchTurn()).toBeTruthy();
+    expect(gameController.currentTurn).toBe(gameController.computer);
+  });
 });
