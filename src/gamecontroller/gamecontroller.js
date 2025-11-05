@@ -11,7 +11,11 @@ class GameController {
   initialize() {
     this.player = new Player();
     this.computer = new Computer();
+    this.player.setShips();
+    this.computer.setShips();
     this.currentTurn = this.player;
+    this.isGameOver = false;
+    this.winner = null;
   }
 }
 
