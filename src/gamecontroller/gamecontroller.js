@@ -17,6 +17,11 @@ class GameController {
     this.isGameOver = false;
     this.winner = null;
   }
+
+  switchTurn() {
+    return (this.currentTurn =
+      this.currentTurn === this.player ? this.computer : this.player);
+  }
 }
 
 export { GameController };
