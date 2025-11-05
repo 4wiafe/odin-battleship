@@ -28,8 +28,9 @@ describe("game behavior", () => {
   });
 
   test("should have a switchTurn() method", () => {
+    gameController.initialize();
     gameController.currentTurn = gameController.player;
-    
+
     expect(gameController.switchTurn()).toBeTruthy();
     expect(gameController.currentTurn).toBe(gameController.computer);
   });
