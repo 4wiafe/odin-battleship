@@ -38,19 +38,23 @@ class GameController {
         console.log("Spot already hit. Try again with new coordinates.");
 
         return "already hit";
-      } else if (attackResult === "miss") {
+      }
+      
+      if (attackResult === "miss") {
         this.switchTurn();
 
         return "miss";
-      } else if (attackResult === "hit") {
+      }
+      
+      if (attackResult === "hit") {
         if (target.allShipsSunk()) {
           this.isGameOver = true;
           this.winner = currentTurn;
 
           return "Game over!"
-        } else {
-          console.log("Hit! Attack again with new coordinates.");
-        }
+        } 
+
+        console.log("Hit! Attack again with new coordinates.");
       }
     } else {
       target = player.gameboard;
@@ -60,24 +64,28 @@ class GameController {
         this.switchTurn();
 
         return "miss";
-      } else if (attackResult === "already hit") {
+      }
+      
+      if (attackResult === "already hit") {
         console.log("Chosen spot already hit. Generating new attack coordinates...");
         const newX = Math.floor(Math.random() * 10);
         const newY = Math.floor(Math.random() * 10);
 
-        attackResult = computer.makeMove(target, newX, newY);
-      } else if (attackResult === "hit") {
+        return computer.makeMove(target, newX, newY);
+      }
+      
+      if (attackResult === "hit") {
         if (target.allShipsSunk()) {
           this.isGameOver = true;
           this.winner = currentTurn;
 
           return "Game over!";
-        } else {
-          const newX = Math.floor(Math.random() * 10);
-          const newY = Math.floor(Math.random() * 10);
-
-          attackResult = computer.makeMove(target, newX, newY);
         }
+
+        const newX = Math.floor(Math.random() * 10);
+        const newY = Math.floor(Math.random() * 10);
+
+        return computer.makeMove(target, newX, newY);
       }
     }
 
