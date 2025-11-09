@@ -69,7 +69,7 @@ describe("game behavior", () => {
     gameController.isGameOver = true;
     gameController.winner = gameController.player;
 
-    gameController.restart();
+    gameController.restartGame();
 
     expect(gameController.isGameOver).toBe(false);
     expect(gameController.winner).toBe(null);
