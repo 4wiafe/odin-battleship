@@ -105,6 +105,10 @@ class GameController {
 
     return false;
   }
+
+  restart() {
+    this.initialize();
+  }
 }
 
 export { GameController };

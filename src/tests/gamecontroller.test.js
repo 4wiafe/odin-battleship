@@ -68,7 +68,6 @@ describe("game behavior", () => {
 
     gameController.isGameOver = true;
     gameController.winner = gameController.player;
-    gameController.currentTurn = gameController.computer;
 
     gameController.restart();
 
