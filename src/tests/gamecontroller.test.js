@@ -53,8 +53,8 @@ describe("game behavior", () => {
   test("should end game when all ships have sunk", () => {
     gameController.initialize();
 
-    const computerBoard = gameController.player.gameboard;
-    jest.spyOn(computerBoard, "allShipsSunk").mockReturnValue(true);
+    gameController.computer.gameboard.allShipsSunk = () => true;
+    gameController.player.gameboard.allShipsSunk = () => false;
 
     const result = gameController.checkGameOver();
 
