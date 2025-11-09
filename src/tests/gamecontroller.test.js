@@ -49,4 +49,17 @@ describe("game behavior", () => {
     expect(gameController.currentTurn).toBe(gameController.computer);
     expect(gameController.isGameOver).toBe(false);
   });
+
+  test("should end game when all ships have sunk", () => {
+    gameController.initialize();
+
+    const computerBoard = gameController.player.gameboard;
+    jest.spyOn(computerBoard, "allShipsSunk").mockReturnValue(true);
+
+    const result = gameController.checkGameOver();
+
+    expect(result).toBe(true);
+    expect(gameController.isGameOver).toBe(true);
+    expect(gameController.winner).toBe(gameController.player);
+  });
 });
