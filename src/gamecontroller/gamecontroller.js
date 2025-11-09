@@ -24,6 +24,8 @@ class GameController {
   }
 
   executeTurn(x, y) {
+    if (this.checkGameOver()) return "Game is already over.";
+    
     const currentTurn = this.currentTurn;
     const player = this.player;
     const computer = this.computer;
@@ -47,12 +49,9 @@ class GameController {
       }
       
       if (attackResult === "hit") {
-        if (target.allShipsSunk()) {
-          this.isGameOver = true;
-          this.winner = currentTurn;
-
-          return "Game over!"
-        } 
+        if (this.checkGameOver()) {
+          return "Game over!";
+        }
 
         console.log("Hit! Attack again with new coordinates.");
       }
@@ -75,10 +74,7 @@ class GameController {
       }
       
       if (attackResult === "hit") {
-        if (target.allShipsSunk()) {
-          this.isGameOver = true;
-          this.winner = currentTurn;
-
+        if (this.checkGameOver()) {
           return "Game over!";
         }
 
