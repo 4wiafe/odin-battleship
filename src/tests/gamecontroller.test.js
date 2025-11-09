@@ -62,4 +62,20 @@ describe("game behavior", () => {
     expect(gameController.isGameOver).toBe(true);
     expect(gameController.winner).toBe(gameController.player);
   });
+
+  test("should restart game with a clean state", () => {
+    gameController.initialize();
+
+    gameController.isGameOver = true;
+    gameController.winner = gameController.player;
+    gameController.currentTurn = gameController.computer;
+
+    gameController.restart();
+
+    expect(gameController.isGameOver).toBe(false);
+    expect(gameController.winner).toBe(null);
+    expect(gameController.currentTurn).toBe(gameController.player);
+    expect(gameController.player).toBeDefined();
+    expect(gameController.computer).toBeDefined();
+  });
 });
