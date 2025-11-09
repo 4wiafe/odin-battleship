@@ -91,6 +91,24 @@ class GameController {
 
     return attackResult;
   }
+
+  checkGameOver() {
+    if (this.computer.gameboard.allShipsSunk()) {
+      this.isGameOver = true;
+      this.winner = this.player
+
+      return true;
+    }
+
+    if (this.player.gameboard.allShipsSunk()) {
+      this.isGameOver = true;
+      this.winner = this.computer;
+
+      return true;
+    }
+
+    return false;
+  }
 }
 
 export { GameController };
