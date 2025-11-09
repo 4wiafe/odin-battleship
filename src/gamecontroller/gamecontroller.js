@@ -106,7 +106,7 @@ class GameController {
     return false;
   }
 
-  restart() {
+  restartGame() {
     this.initialize();
   }
 }
