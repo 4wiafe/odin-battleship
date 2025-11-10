@@ -4,7 +4,7 @@ import { StorageService } from "../storageservice/storageservice";
 let gameController;
 let storageService;
 
-before(() => {
+beforeEach(() => {
   gameController = new GameController();
   storageService = new StorageService();
 });
