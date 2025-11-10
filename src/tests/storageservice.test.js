@@ -5,8 +5,8 @@ let gameController;
 let storageService;
 
 before(() => {
-  gameController = new GameController;
-  storageService = new StorageService;
+  gameController = new GameController();
+  storageService = new StorageService();
 });
 
 describe("save, load and clear data", () => {
