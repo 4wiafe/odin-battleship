@@ -42,7 +42,7 @@ class Computer {
     const attackResult = opponentBoard.receiveAttack(x, y);
 
     if (attackResult === "hit") {
-      opponentBoard.ships.forEach(ship => {
+      opponentBoard.ships.forEach((ship) => {
         if (ship.isSunk()) {
           console.log(`Ship ${ship.length} has sunk!`);
         }
@@ -68,6 +68,21 @@ class Computer {
     }
 
     return attackResult;
+  }
+
+  toJSON() {
+    return {
+      gameboard: this.gameboard.toJSON(),
+      totalShips: this.totalShips,
+    };
+  }
+
+  static fromJSON(data) {
+    const computer = new Computer();
+    computer.gameboard = Gameboard.fromJSON(data.gameboard);
+    computer.totalShips = data.totalShips;
+
+    return computer;
   }
 }
 

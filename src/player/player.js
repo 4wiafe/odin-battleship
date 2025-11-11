@@ -68,6 +68,22 @@ class Player {
 
     return attackResult;
   }
+
+  toJSON() {
+    return {
+      name: this.name,
+      gameboard: this.gameboard.toJSON(),
+      totalShips: this.totalShips
+    };
+  }
+
+  static fromJSON(data) {
+    const player = new Player(data.name);
+    player.gameboard = Gameboard.fromJSON(data.gameboard);
+    player.totalShips = data.totalShips;
+
+    return player;
+  }
 }
 
 export { Player };

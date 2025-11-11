@@ -109,6 +109,38 @@ class GameController {
   restartGame() {
     this.initialize();
   }
+
+  toJSON() {
+    return {
+      player: this.player.toJSON(),
+      computer: this.computer.toJSON(),
+      currentTurn: this.currentTurn === this.player ? "player" : "computer",
+      isGameOver: this.isGameOver,
+      winner: this.winner
+        ? this.winner === this.player
+          ? "player"
+          : "computer"
+        : null
+    };
+  }
+
+  static fromJSON(data) {
+    const gameController = new GameController();
+    gameController.player = Player.fromJSON(data.player);
+    gameController.computer = Computer.fromJSON(data.computer);
+    gameController.currentTurn = data.currentTurn === "player"
+      ? gameController.player
+      : gameController.computer;
+    
+    gameController.isGameOver = data.isGameOver;
+    gameController.winner = data.winner === "player"
+      ? gameController.player
+      : data.winner === "computer"
+        ? gameController.computer
+      : null;
+
+    return gameController;
+  }
 }
 
 export { GameController };
