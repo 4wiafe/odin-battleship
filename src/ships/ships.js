@@ -17,6 +17,20 @@ class Ships {
   isSunk() {
     return this.timesHit >= this.length;
   }
+
+  toJSON() {
+    return {
+      length: this.length,
+      timesHit: this.timesHit
+    };
+  }
+
+  static fromJSON(data) {
+    const ship = new Ships(data.length);
+    ship.timesHit = data.timesHit;
+
+    return ship;
+  }
 }
 
 export { Ships };
