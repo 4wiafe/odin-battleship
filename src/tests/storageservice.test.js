@@ -57,4 +57,17 @@ describe("save, load and clear data", () => {
     expect(loadedGame).toBeInstanceOf(GameController);
     expect(loadedGame.isGameOver).toBe(false);
   });
+
+  test("clear data from localStorage", () => {
+    gameController.initialize();
+
+    const mockData = JSON.stringify(gameController.toJSON());
+    localStorage.setItem("battleshipGameData", mockData);
+
+    jest.spyOn(localStorage, "removeItem");
+
+    const clearGameData = StorageService.clear();
+    expect(localStorage.removeItem).toHaveBeenCalledWith("battleshipGameData");
+    expect(clearGameData).toBe(true);
+  });
 });
