@@ -30,7 +30,7 @@ describe("save, load and clear data", () => {
     expect(StorageService).toBeTruthy();
   });
 
-  test("should have a save method", () => {
+  test("save game data to localStorage", () => {
     gameController.initialize();
 
     jest.spyOn(localStorage, "setItem");
@@ -41,5 +41,20 @@ describe("save, load and clear data", () => {
       JSON.stringify(gameController),
     );
     expect(result).toBe(true);
+  });
+
+  test("load game data from localStorage", () => {
+    gameController.initialize();
+
+    const mockData = JSON.stringify(gameController.toJSON());
+    localStorage.setItem("battleshipGameData", mockData);
+
+    jest.spyOn(localStorage, "getItem");
+
+    const loadedGame = StorageService.load();
+
+    expect(localStorage.getItem).toHaveBeenCalledWith("battleshipGameData");
+    expect(loadedGame).toBeInstanceOf(GameController);
+    expect(loadedGame.isGameOver).toBe(false);
   });
 });
