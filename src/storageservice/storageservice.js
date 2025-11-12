@@ -13,6 +13,19 @@ class StorageService {
       return false;
     }
   }
+
+  static load() {
+    try {
+      const gameData = localStorage.getItem(KEY);
+      if (!gameData) return false;
+
+      const parsed = JSON.parse(gameData);
+      return GameController.fromJSON(parsed);
+    } catch (error) {
+      console.error("Failed to load game data");
+      return false;
+    }
+  }
  }
 
 export { StorageService };
