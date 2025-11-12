@@ -26,6 +26,16 @@ class StorageService {
       return false;
     }
   }
+
+  static clear() {
+    try {
+      localStorage.removeItem(KEY);
+      return true;
+    } catch (error) {
+      console.error("Failed to clear game data", error);
+      return false;
+    }
+  }
  }
 
 export { StorageService };
