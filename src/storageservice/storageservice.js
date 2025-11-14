@@ -36,6 +36,6 @@ class StorageService {
       return false;
     }
   }
- }
+}
 
 export { StorageService };
