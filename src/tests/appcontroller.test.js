@@ -2,18 +2,19 @@ import { AppController } from "../appcontroller/appcontroller.js";
 import { GameController } from "../gamecontroller/gamecontroller.js";
 import { StorageService } from "../storageservice/storageservice.js";
 
-let appController;
-let gameController;
-let storageService;
+jest.mock("../storageservice/storageservice.js");
+
+let app;
 
 beforeEach(() => {
-  appController = new AppController();
-  gameController = new GameController();
-  storageService = new StorageService();
+  app = new AppController();
+  StorageService.load.mockClear();
+  StorageService.save.mockClear();
+  StorageService.clear.mockClear();
 });
 
-describe("appController behaviour", () => {
+describe("AppController", () => {
   test("appController should exist", () => {
-    expect(appController).toBeTruthy();
+    expect(app).toBeTruthy();
   });
 });
