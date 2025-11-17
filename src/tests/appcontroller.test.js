@@ -17,4 +17,17 @@ describe("AppController", () => {
   test("appController should exist", () => {
     expect(app).toBeTruthy();
   });
+
+  test("initialize() should load saved game if data exists", () => {
+    const mockSavedGame = { some: "data" };
+
+    StorageService.load.mockReturnValue(mockSavedGame);
+    jest.spyOn(GameController, "fromJSON").mockReturnValue({ loaded: true });
+    
+    app.initialize();
+
+    expect(StorageService.load).toHaveBeenCalledTimes(1);
+    expect(GameController.fromJSON).toHaveBeenCalledWith(mockSavedGame);
+    expect(app.game).toEqual({ loaded: true });
+  });
 });
