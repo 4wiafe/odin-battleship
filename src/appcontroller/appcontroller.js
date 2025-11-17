@@ -17,6 +17,10 @@ class AppController{
     this.game = saved;
     return this.game;
   }
+
+  handleAttack(x, y) {
+    return this.game.executeTurn(x, y);
+  }
 }
 
 export { AppController };
