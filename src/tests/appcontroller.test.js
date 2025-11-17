@@ -36,4 +36,17 @@ describe("AppController", () => {
     expect(GameController).toHaveBeenCalledTimes(1);
     expect(app.game.initialize).toHaveBeenCalledTimes(1);
   });
+
+  test("handleAttack() calls game.executeTurn()", () => {
+    const mockGame = {
+      executeTurn: jest.fn().mockReturnValue("hit")
+    };
+
+    app.game = mockGame;
+
+    const result = app.handleAttack(3, 4);
+
+    expect(mockGame.executeTurn).toHaveBeenCalledWith(3, 4);
+    expect(result).toBe("hit");
+  });
 });
