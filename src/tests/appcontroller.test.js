@@ -57,4 +57,10 @@ describe("AppController", () => {
 
     expect(StorageService.save).toHaveBeenCalledWith(app.game);
   });
+
+  test("clearProgress() clears storage", () => {
+    app.clearProgress();
+
+    expect(StorageService.clear).toHaveBeenCalledTimes(1);
+  });
 });
