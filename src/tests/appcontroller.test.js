@@ -49,4 +49,12 @@ describe("AppController", () => {
     expect(mockGame.executeTurn).toHaveBeenCalledWith(3, 4);
     expect(result).toBe("hit");
   });
+
+  test("saveProgress() saves game state", () => {
+    app.game = { some: "gameObject" };
+
+    app.saveProgress();
+
+    expect(StorageService.save).toHaveBeenCalledWith(app.game);
+  });
 });
