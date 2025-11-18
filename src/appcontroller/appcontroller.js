@@ -21,6 +21,10 @@ class AppController{
   handleAttack(x, y) {
     return this.game.executeTurn(x, y);
   }
+
+  saveProgress() {
+    return StorageService.save(this.game);
+  }
 }
 
 export { AppController };
