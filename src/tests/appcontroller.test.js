@@ -18,15 +18,20 @@ describe("AppController", () => {
   });
 
   test("initialize() loads saved game if available", () => {
-    const mockGame = { mock: true };
+    const mockData = { mock: true };
 
-    StorageService.load.mockReturnValue(mockGame);
+    StorageService.load.mockReturnValue(mockData);
 
-    app.initialize();
+    jest.spyOn(GameController, "fromJSON").mockReturnValue("REBUILT");
+
+    const result = app.initialize();
 
     expect(StorageService.load).toHaveBeenCalledTimes(1);
-    expect(app.game).toBe(mockGame);
+    expect(GameController.fromJSON).toHaveBeenCalledWith(mockData);
+    expect(result).toBe("REBUILT");
+    expect(app.game).toBe("REBUILT");
   });
+
 
   test("initialize() creates new game if no saved data", () => {
     StorageService.load.mockReturnValue(false);
@@ -65,10 +70,10 @@ describe("AppController", () => {
   });
 
   test("restartGame() restarts the game", () => {
-    app.game = { restartGame: jest.fn() };
+    app.game = { initialize: jest.fn() };
 
     app.restartGame();
 
-    expect(app.game.restartGame).toHaveBeenCalledTimes(1);
+    expect(app.game.initialize).toHaveBeenCalledTimes(1);
   });
 });
