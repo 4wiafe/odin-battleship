@@ -11,10 +11,11 @@ class AppController{
 
     if (!saved) {
       this.game = new GameController();
-      return this.game.initialize();
+      this.game.initialize();
+      return this.game;
     }
 
-    this.game = saved;
+    this.game = GameController.fromJSON(saved);
     return this.game;
   }
 
@@ -27,11 +28,14 @@ class AppController{
   }
 
   clearProgress() {
-    return StorageService.clear();
+    StorageService.clear();
+    return this.restartGame();
   }
 
   restartGame() {
-    return this.game.restartGame();
+    this.game = new GameController();
+    this.game.initialize();
+    return this.game
   }  
 }
 
