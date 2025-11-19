@@ -63,4 +63,12 @@ describe("AppController", () => {
 
     expect(StorageService.clear).toHaveBeenCalledTimes(1);
   });
+
+  test("restartGame() restarts the game", () => {
+    app.game = { restartGame: jest.fn() };
+
+    app.restartGame();
+
+    expect(app.game.restartGame).toHaveBeenCalledTimes(1);
+  });
 });
