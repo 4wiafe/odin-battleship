@@ -25,6 +25,10 @@ class AppController{
   saveProgress() {
     return StorageService.save(this.game);
   }
+
+  clearProgress() {
+    return StorageService.clear();
+  }
 }
 
 export { AppController };
