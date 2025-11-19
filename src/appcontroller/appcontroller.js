@@ -29,6 +29,10 @@ class AppController{
   clearProgress() {
     return StorageService.clear();
   }
+
+  restartGame() {
+    return this.game.restartGame();
+  }  
 }
 
 export { AppController };
