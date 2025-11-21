@@ -1,5 +1,5 @@
 import { AppController } from "../appcontroller/appcontroller.js";
 
-class UiController{ }
+class UIController{ }
 
-export { UiController };
+export { UIController };
