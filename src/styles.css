@@ -59,3 +59,25 @@ body {
   background: #e9e9eb;
   padding: 5px;
 }
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  display: block;
+  margin: 20px;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.random {
+  background: #7e7ec9;
+  color: #fff;
+}
+
+.start {
+  background: #3131eb;
+  color: #fff;
+  width: 20%;
+}
