@@ -47,3 +47,15 @@ body {
   background: #e9e9eb;
   width: 40%;
 }
+
+.board-label {
+  margin: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.player-board,
+.computer-board {
+  background: #e9e9eb;
+  padding: 5px;
+}
