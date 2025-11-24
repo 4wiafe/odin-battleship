@@ -81,3 +81,10 @@ button {
   color: #fff;
   width: 20%;
 }
+
+.ship {
+  height: 100%;
+  width: 100%;
+  background: #7e7ec9;
+  border: 1px solid #3131eb;
+}
