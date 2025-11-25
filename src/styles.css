@@ -71,12 +71,12 @@ button {
   cursor: pointer;
 }
 
-.random {
+.random-btn {
   background: #7e7ec9;
   color: #fff;
 }
 
-.start {
+.start-btn {
   background: #3131eb;
   color: #fff;
   width: 20%;
