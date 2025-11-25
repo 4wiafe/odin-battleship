@@ -18,12 +18,19 @@ class UIController{
 
   renderBoard() {
     for (let i = 0; i < 100; i++) {
+      const row = Math.floor(i / 10);
+      const col = i % 10;
+
       const playerCell = document.createElement("div");
       playerCell.classList.add("grid-item");
+      playerCell.dataset.x = row;
+      playerCell.dataset.y = col;
       this.playerBoard.append(playerCell);
 
       const computerCell = document.createElement("div");
       computerCell.classList.add("grid-item");
+      computerCell.dataset.x = row;
+      computerCell.dataset.y = col;
       this.computerBoard.append(computerCell);
     }
   }
