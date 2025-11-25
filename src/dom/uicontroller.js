@@ -15,6 +15,18 @@ class UIController{
   init() {
     this.appController.initialize();
   }
+
+  renderBoard() {
+    for (let i = 0; i < 100; i++) {
+      const playerCell = document.createElement("div");
+      playerCell.classList.add("grid-item");
+      this.playerBoard.append(playerCell);
+
+      const computerCell = document.createElement("div");
+      computerCell.classList.add("grid-item");
+      this.computerBoard.append(computerCell);
+    }
+  }
  }
 
 export { UIController };
