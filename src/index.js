@@ -5,4 +5,4 @@ import { AppController } from "./appcontroller/appcontroller.js";
 const app = new AppController();
 const dom = new UIController(app);
 
-dom.renderBoard();
+dom.init();
