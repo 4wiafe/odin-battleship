@@ -16,6 +16,7 @@ class UIController{
     this.appController.initialize();
     this.renderBoard();
     this.renderPlayerShips();
+    this.renderComputerShips();
   }
 
   renderBoard() {
@@ -41,14 +42,26 @@ class UIController{
     const internalBoard = this.appController.game.player.gameboard;
     const playerCells = this.playerBoard.querySelectorAll(".grid-item");
 
-    console.log(internalBoard);
-
     playerCells.forEach(cell => {
       const row = Number(cell.dataset.x);
       const col = Number(cell.dataset.y);
 
       if (internalBoard.board[row][col] !== null) {
-        cell.classList.add("ship");
+        cell.classList.add("playerShips");
+      }
+    });
+  }
+
+  renderComputerShips() {
+    const internalBoard = this.appController.game.computer.gameboard;
+    const computerCells = this.computerBoard.querySelectorAll(".grid-item");
+
+    computerCells.forEach((cell) => {
+      const row = Number(cell.dataset.x);
+      const col = Number(cell.dataset.y);
+
+      if (internalBoard.board[row][col] !== null) {
+        cell.classList.add("computerShips");
       }
     });
   }
