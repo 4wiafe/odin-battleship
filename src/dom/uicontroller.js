@@ -61,10 +61,12 @@ class UIController{
       const col = Number(cell.dataset.y);
 
       if (internalBoard.board[row][col] !== null) {
-        cell.classList.add("computerShips");
+        return;
       }
     });
   }
  }
 
 export { UIController };
+
+  // computerShips
