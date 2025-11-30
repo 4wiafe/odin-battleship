@@ -65,8 +65,33 @@ class UIController{
       }
     });
   }
+
+  handleAttack(x, y) {
+    const row = Number(x);
+    const col = Number(y);
+    const result = this.appController.handleAttack(row, col);
+
+    const targetCell = this.computerBoard.querySelector(
+      `.grid-item[data-x="${row}"][data-y="${col}"]`
+    );
+
+    if (result === "hit") {
+      targetCell.classList.add("hit");
+      this.displayMessage.textContent = "Hit!";
+    }
+
+    if (result === "miss") {
+      targetCell.classList.add("miss");
+      this.displayMessage.textContent = "Miss!";
+    }
+
+    if (result === "sunk") {
+      targetCell.classList.add("green");
+      this.displayMessage.textContent = "Ship sunk!";
+    }
+
+    targetCell.classList.add("disabled");
+  }
  }
 
 export { UIController };
-
-  // computerShips

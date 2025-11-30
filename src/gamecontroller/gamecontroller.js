@@ -37,8 +37,6 @@ class GameController {
       attackResult = player.makeMove(target, x, y);
 
       if (attackResult === "already hit") {
-        console.log("Spot already hit. Try again with new coordinates.");
-
         return "already hit";
       }
       
@@ -52,8 +50,6 @@ class GameController {
         if (this.checkGameOver()) {
           return "Game over!";
         }
-
-        console.log("Hit! Attack again with new coordinates.");
       }
     } else {
       target = player.gameboard;
@@ -66,7 +62,6 @@ class GameController {
       }
       
       if (attackResult === "already hit") {
-        console.log("Chosen spot already hit. Generating new attack coordinates...");
         const newX = Math.floor(Math.random() * 10);
         const newY = Math.floor(Math.random() * 10);
 
