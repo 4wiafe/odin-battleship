@@ -39,15 +39,13 @@ class Player {
     if (attackResult === "hit") {
       opponentBoard.ships.forEach((ship) => {
         if (ship.isSunk()) {
-          console.log(`Ship ${ship.length} has sunk!`);
+          return "sunk";
         }
       });
 
       const allSunk = opponentBoard.allShipsSunk();
 
       if (allSunk) {
-        console.log("All ships have sunk!");
-
         return "Game over!";
       }
 
@@ -55,14 +53,10 @@ class Player {
     }
 
     if (attackResult === "miss") {
-      console.log("You missed!");
-
       return "miss";
     }
 
     if (attackResult === "already hit") {
-      console.log("Coordinates already attacked. Try different coordinates.");
-
       return "already hit";
     }
 

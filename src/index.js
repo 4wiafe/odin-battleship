@@ -3,6 +3,6 @@ import { UIController } from "./dom/uicontroller.js";
 import { AppController } from "./appcontroller/appcontroller.js";
 
 const app = new AppController();
-const dom = new UIController(app);
+const game = new UIController(app);
 
-dom.init();
+game.init();

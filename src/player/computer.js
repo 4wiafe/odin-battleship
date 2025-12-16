@@ -44,26 +44,24 @@ class Computer {
     if (attackResult === "hit") {
       opponentBoard.ships.forEach((ship) => {
         if (ship.isSunk()) {
-          console.log(`Ship ${ship.length} has sunk!`);
+          return "sunk";
         }
       });
 
       const allSunk = opponentBoard.allShipsSunk();
 
       if (allSunk) {
-        console.log("All ships have sunk!");
-
         return "Game over!";
       }
 
       return "hit";
-    } else if (attackResult === "miss") {
-      console.log("You missed!");
-
+    }
+    
+    if (attackResult === "miss") {
       return "miss";
-    } else if (attackResult === "already hit") {
-      console.log("Coordinates already attacked. Try different coordinates.");
-
+    }
+    
+    if (attackResult === "already hit") {
       return "already hit";
     }
 
