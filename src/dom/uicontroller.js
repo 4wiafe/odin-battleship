@@ -1,5 +1,3 @@
-import { AppController } from "../appcontroller/appcontroller.js";
-
 class UIController{
   constructor(appController) {
     this.appController = appController;
@@ -9,14 +7,27 @@ class UIController{
     this.playerBoard = document.querySelector("#player-board");
     this.computerBoard = document.querySelector("#computer-board");
     this.randomBtn = document.querySelector(".random-btn");
-    this.randomBtn = document.querySelector(".start-btn");
+    this.startBtn = document.querySelector(".start-btn");
   }
 
   init() {
     this.appController.initialize();
+    this.render();
+    this.bindEvents();
+  }
+
+  clearState() {
+    this.playerBoard.innerHTML = "";
+    this.computerBoard.innerHTML = "";
+  }
+
+  render() {
+    this.clearState();
     this.renderBoard();
     this.renderPlayerShips();
     this.renderComputerShips();
+    this.renderAttacks();
+    this.switchTurnUI();
   }
 
   renderBoard() {
@@ -66,32 +77,61 @@ class UIController{
     });
   }
 
-  handleAttack(x, y) {
-    const row = Number(x);
-    const col = Number(y);
-    const result = this.appController.handleAttack(row, col);
+  renderAttacks() {
+    const computerBoard = this.appController.game.computer.gameboard.board;
+    const playerBoard = this.appController.game.player.gameboard.board;
+    
+    this.computerBoard.querySelectorAll(".grid-item").forEach(cell => {
+      const row = Number(cell.dataset.x);
+      const col = Number(cell.dataset.y);
+      const result = computerBoard[row][col];
 
-    const targetCell = this.computerBoard.querySelector(
-      `.grid-item[data-x="${row}"][data-y="${col}"]`
-    );
+      if (result === "hit") {
+        cell.classList.add("hit", "disabled");
+      }
 
-    if (result === "hit") {
-      targetCell.classList.add("hit");
-      this.displayMessage.textContent = "Hit!";
-    }
+      if (result === "miss") {
+        cell.classList.add("miss", "disabled");
+      }
+    });
 
-    if (result === "miss") {
-      targetCell.classList.add("miss");
-      this.displayMessage.textContent = "Miss!";
-    }
+    this.playerBoard.querySelectorAll(".grid-item").forEach((cell) => {
+      const row = Number(cell.dataset.x);
+      const col = Number(cell.dataset.y);
+      const result = playerBoard[row][col];
 
-    if (result === "sunk") {
-      targetCell.classList.add("green");
-      this.displayMessage.textContent = "Ship sunk!";
-    }
+      if (result === "hit") {
+        cell.classList.add("hit", "disabled");
+      }
 
-    targetCell.classList.add("disabled");
+      if (result === "miss") {
+        cell.classList.add("miss", "disabled");
+      }
+    });
   }
+
+  attackState(x, y) {
+    this.appController.handleAttack(x, y);
+    this.render();
+  }
+
+  switchTurnUI() {
+    const currentTurn = this.appController.game.currentTurn;
+    const player = this.appController.game.player;
+    const computer = this.appController.game.computer;
+
+    if (currentTurn === player) {
+      this.playerBoard.classList.add("disabled");
+      this.computerBoard.classList.remove("disabled");
+    }
+
+    if (currentTurn === computer) {
+      this.computerBoard.classList.add("disabled");
+      this.playerBoard.classList.remove("disabled");
+    }
+  }
+
+  bindEvents() {}
  }
 
 export { UIController };

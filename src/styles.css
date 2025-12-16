@@ -60,6 +60,10 @@ body {
   padding: 5px;
 }
 
+#computer-board .grid-item {
+  cursor: pointer;
+}
+
 button {
   padding: 10px;
   border: none;
@@ -86,4 +90,17 @@ button {
   height: 100%;
   width: 100%;
   background: #7e7ec9;
+}
+
+.hit {
+  background: #08ee08;
+}
+
+.miss {
+  background: #d81616;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
 }
