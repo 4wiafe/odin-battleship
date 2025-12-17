@@ -53,7 +53,10 @@ class GameController {
       }
     } else {
       target = player.gameboard;
-      attackResult = computer.makeMove(target, x, y);
+      const xCoor = Math.floor(Math.random() * 10);
+      const yCoor = Math.floor(Math.random() * 10);
+      
+      attackResult = computer.makeMove(target, xCoor, yCoor);
 
       if (attackResult === "miss") {
         this.switchTurn();
