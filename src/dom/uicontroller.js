@@ -131,7 +131,13 @@ class UIController{
     }
   }
 
-  bindEvents() {}
+  bindEvents() {
+    this.randomBtn.addEventListener("click", () => {
+      this.appController.game.player.gameboard.resetBoard();
+      this.appController.game.player.setShips();
+      this.render();
+    });
+  }
  }
 
 export { UIController };
