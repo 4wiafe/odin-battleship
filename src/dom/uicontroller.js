@@ -137,6 +137,20 @@ class UIController{
       this.appController.game.player.setShips();
       this.render();
     });
+
+    this.computerBoard.addEventListener("click", (event) => {
+      const targetCell = event.target;
+
+      if (targetCell.className !== "grid-item") return;
+
+      if (targetCell.className === "grid-item") {
+        const x = targetCell.dataset.x;
+        const y = targetCell.dataset.y;
+
+        this.attackState(y, x);
+        this.renderAttacks();
+      }
+    });
   }
  }
 
