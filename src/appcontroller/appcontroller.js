@@ -20,7 +20,7 @@ class AppController{
   }
 
   handleAttack(x, y) {
-    return this.game.executeTurn(x, y);
+    this.game.executeTurn(x, y);
   }
 
   saveProgress() {
