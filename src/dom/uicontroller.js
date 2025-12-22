@@ -1,6 +1,7 @@
 class UIController{
   constructor(appController) {
     this.appController = appController;
+    this.isGameActive = false;
 
     this.displayMessage = document.querySelector(".display-message");
     this.boardContainer = document.querySelector("#board-container");
@@ -25,7 +26,6 @@ class UIController{
     this.clearState();
     this.renderBoard();
     this.renderPlayerShips();
-    this.renderComputerShips();
     this.renderAttacks();
     this.switchTurnUI();
   }
@@ -139,17 +139,26 @@ class UIController{
     });
 
     this.computerBoard.addEventListener("click", (event) => {
+      if (!this.isGameActive) return;
+
       const targetCell = event.target;
 
-      if (targetCell.className !== "grid-item") return;
+      if (!targetCell.classList.contains("grid-item")) return;
+      if (targetCell.classList.contains("disabled")) return;
 
-      if (targetCell.className === "grid-item") {
+      if (targetCell.classList.contains("grid-item")) {
         const x = targetCell.dataset.x;
         const y = targetCell.dataset.y;
 
         this.attackState(y, x);
-        this.renderAttacks();
       }
+
+    });
+
+    this.startBtn.addEventListener("click", () => {
+      this.isGameActive = true;
+      this.startBtn.style.display = "none";
+      this.randomBtn.style.display = "none";
     });
   }
  }
