@@ -24,66 +24,35 @@ class GameController {
   }
 
   executeTurn(x, y) {
-    if (this.checkGameOver()) return "Game is already over.";
-    
-    const currentTurn = this.currentTurn;
-    const player = this.player;
-    const computer = this.computer;
-    let target;
-    let attackResult;
+    if (this.checkGameOver()) return "Game over!";
 
-    if (currentTurn === player) {
-      target = computer.gameboard;
-      attackResult = player.makeMove(target, x, y);
+    if (this.currentTurn === this.player) {
+      const result = this.player.makeMove(this.computer.gameboard, x, y);
 
-      if (attackResult === "already hit") {
-        return "already hit";
-      }
+      if (result === "already hit") return result;
       
-      if (attackResult === "miss") {
+      if (result === "miss") {
         this.switchTurn();
-
-        return "miss";
+        this.executeComputerTurn();
       }
-      
-      if (attackResult === "hit") {
-        if (this.checkGameOver()) {
-          return "Game over!";
-        }
-      }
-    } else {
-      target = player.gameboard;
-      const xCoor = Math.floor(Math.random() * 10);
-      const yCoor = Math.floor(Math.random() * 10);
-      
-      attackResult = computer.makeMove(target, xCoor, yCoor);
 
-      if (attackResult === "miss") {
-        this.switchTurn();
+      return result;
+    }
+  }
 
-        return "miss";
-      }
-      
-      if (attackResult === "already hit") {
-        const newX = Math.floor(Math.random() * 10);
-        const newY = Math.floor(Math.random() * 10);
+  executeComputerTurn() {
+    if (this.checkGameOver()) return "Game over!"
 
-        return computer.makeMove(target, newX, newY);
-      }
-      
-      if (attackResult === "hit") {
-        if (this.checkGameOver()) {
-          return "Game over!";
-        }
+    const {x, y} = this.computer.getRandomMove();
+    const result = this.computer.makeMove(this.player.gameboard, x, y);
 
-        const newX = Math.floor(Math.random() * 10);
-        const newY = Math.floor(Math.random() * 10);
-
-        return computer.makeMove(target, newX, newY);
-      }
+    if (result === "miss") {
+      this.switchTurn();
     }
 
-    return attackResult;
+    if (result === "hit") {
+      this.executeComputerTurn();
+    }
   }
 
   checkGameOver() {
