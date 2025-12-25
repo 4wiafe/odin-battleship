@@ -5,6 +5,13 @@ class Computer {
   constructor() {
     this.gameboard = new Gameboard();
     this.totalShips = 5;
+    this.availableMoves = [];
+
+    for (let x = 0; x < 10; x++) {
+      for (let y = 0; y < 10; y++) {
+        this.availableMoves.push({x, y});
+      }
+    }
   }
 
   setShips() {
@@ -66,6 +73,11 @@ class Computer {
     }
 
     return attackResult;
+  }
+
+  getRandomMove() {
+    const randomIndex = Math.floor(Math.random() * this.availableMoves.length);
+    return this.availableMoves.splice(randomIndex, 1)[0];
   }
 
   toJSON() {
