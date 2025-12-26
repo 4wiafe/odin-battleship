@@ -23,6 +23,10 @@ class AppController{
     return this.game.executeTurn(x, y);
   }
 
+  getWinner() {
+    return this.game.checkGameOver();
+  }
+
   saveProgress() {
     return StorageService.save(this.game);
   }
