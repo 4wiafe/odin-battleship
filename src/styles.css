@@ -104,3 +104,79 @@ button {
   pointer-events: none;
   opacity: 0.6;
 }
+
+dialog {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  text-align: center;
+  width: 300px;
+  z-index: 11;
+  border: none;
+  border-radius: 20px;
+}
+
+.dialog-text-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: none;
+}
+
+.game-over {
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 2rem;
+}
+
+.winner {
+  font-size: 1.5rem;
+}
+
+.dialog-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.restart,
+.cancel {
+  width: 300px;
+  font-weight: bold;
+  font-family: inherit;
+  color: #fff;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.restart {
+  background: #029302;
+}
+
+.cancel {
+  background: #d81616;
+}
+
+.restart:hover,
+.cancel:hover {
+  transform: scale(1.1);
+}
