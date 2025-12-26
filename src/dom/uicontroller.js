@@ -9,6 +9,11 @@ class UIController{
     this.computerBoard = document.querySelector("#computer-board");
     this.randomBtn = document.querySelector(".random-btn");
     this.startBtn = document.querySelector(".start-btn");
+    this.restartBtn = document.querySelector(".restart");
+    this.cancelBtn = document.querySelector(".cancel");
+    this.dialog = document.querySelector("dialog");
+    this.overlay = document.querySelector(".overlay");
+    this.winner = document.querySelector(".winner");
   }
 
   init() {
@@ -28,6 +33,7 @@ class UIController{
     this.renderPlayerShips();
     this.renderAttacks();
     this.switchTurnUI();
+    this.displayWinner();
   }
 
   renderBoard() {
@@ -131,6 +137,25 @@ class UIController{
     }
   }
 
+  displayWinner() {
+    if (this.appController.getWinner()) {
+      const gameWinner = this.appController.game.winner;
+      const player = this.appController.game.player;
+      const computer = this.appController.game.computer;
+
+      if (gameWinner === player) {
+        this.winner.textContent = "You win! 🎉";
+      }
+
+      if (gameWinner === computer) {
+        this.winner.textContent = "Computer wins! 🤖";
+      }
+
+      this.overlay.style.display = "block";
+      this.dialog.style.display = "flex";
+    }
+  }
+
   bindEvents() {
     this.randomBtn.addEventListener("click", () => {
       this.appController.game.player.gameboard.resetBoard();
@@ -160,6 +185,17 @@ class UIController{
       this.startBtn.style.display = "none";
       this.randomBtn.style.display = "none";
     });
+
+    this.restartBtn.addEventListener("click", () => {
+      this.init();
+      this.dialog.style.display = "none";
+      this.overlay.style.display = "none";
+    });
+
+    this.cancelBtn.addEventListener("click", () => {
+      this.dialog.style.display = "none";
+      this.overlay.style.display = "none";
+    })
   }
  }
 
